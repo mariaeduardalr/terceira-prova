@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salários</title>
+    <style>
+        body {
+            background-image: linear-gradient(#7508a8, #2f078b);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        main {
+            background-color: white;
+            border-radius: 10px;
+            text-align: center;
+            margin-left: 300px;
+            margin-right: 300px;
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 7px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Salários dos funcionários</h1>
+        <form action="salvar.php" method="get" onsubmit="return maria()">
+            <label for="funcionarios">Quantos funcionários vão ser cadastrados?</label>
+            <input type="number" name="funcionarios" id="funcionarios" min="1" max="100">
+            <input type="submit" value="INICIAR">
+        </form>
+        <p id="res"></p>
+    </main>
+    <script>
+        function maria() {
+            let res = document.getElementById("res")
+            let func = Number(document.getElementById("funcionarios").value)
+            let cont = 1
+            let total = 0
+            let soma = 0
+            let sal = 0
+            let media = 0
+
+            let maior = 0
+            let menor = 0
+
+            while(cont <= func) {
+                sal = Number(prompt(`Diga o valor do ${cont}° funcionário`))
+                soma += sal 
+                media = soma / func
+                
+                if (cont == 1) {
+                    maior = sal
+                    menor = sal
+                }
+                if (sal > maior) {
+                    maior = sal
+                }
+                if (sal < menor) {
+                    menor = sal
+                }
+                cont ++
+            }
+
+            res.innerHTML= `A empresa gastará no total R$${soma.toFixed(2)} para pagar os funcionários. <br/> A média dos salários é de R$${media.toFixed(2)}<br> O maior salário pago foi R$${maior.toFixed(2)}<br> O menor salário pago foi R$${menor.toFixed(2)}`
+            
+            return false
+        }
+    </script>
+</body>
+</html>
